@@ -36,9 +36,9 @@ $mailboxList = $mailbox_obj->GetMailboxList();
     foreach ($mailboxList as $row) { ?>
         <tr>
             <td><a href="./editMailbox.php?mid=<?= $row['id'] ?>">Edit</a></td>
-            <td><?= $row['lecturerName'] ?></td> 
-            <td><?= $row['boxNumber'] ?></td> 
-            <td><?= $row['lecturerNumber'] ?></td>
+            <td><?= htmlspecialchars($row['lecturerName']) ?></td> <!-- stored XSS !-->
+            <td><?= htmlspecialchars($row['boxNumber']) ?></td> <!-- stored XSS !-->
+            <td><?= htmlspecialchars($row['lecturerNumber']) ?></td> <!-- stored XSS !-->
             <td><a href="./removeMailbox.php?remove_id=<?= $row['id'] ?>">Remove</a></td>
         </tr>
     <?php } ?>
