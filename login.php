@@ -1,15 +1,23 @@
 <?php
 session_start();
-
-if (isset($_GET['btnPressed'])) {
+$gss = isset($_SESSION['gss']) ? $_SESSION['gss'] : 0; // brut force
+if ($gss < 5) {
+    if (isset($_GET['btnPressed'])) {
     $password = isset($_GET['password']) ? $_GET['password'] : "";
 
-    if ($password === "AAA") {
-        header("location: MailBoxList.php");
-    } else {
-        echo "Incorrect password. Try again.";
+        if ($password === "AAA") {
+            header("location: MailBoxList.php");
+        } else {
+            echo "Incorrect password. Try again.";
+            $gss++; // brut force
+        }
     }
 }
+else{
+    echo "Incorrect password. Try again.";
+}
+$_SESSION['gss'] = $gss; // brut force
+
 ?>
 
 <!DOCTYPE html>
