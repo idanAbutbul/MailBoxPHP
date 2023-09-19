@@ -5,9 +5,11 @@ $mysql_obj = new mysql_conn();
 $mysql = $mysql_obj->GetConn();
 
 if (isset($_GET['SendBtn'])) {
-    include "class_mailbox.php";
+    if(isset($_GET['token']) && ($_GET['token'] == $_SESSION['TOKEN']) ){ // csrf protection
+        include "class_mailbox.php";
     $mailbox_obj = new mailbox_crud($mysql);
     $mailbox_obj->CreateMailbox();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -22,6 +24,8 @@ if (isset($_GET['SendBtn'])) {
 <body>
 <h2>Create Mailbox</h2>
 <form method="GET" action="">
+    <input type="hidden" name="token" value="<?= $_SESSION['TOKEN']?>" /> <!-- csrf protection !-->
+
     <label for="lecturerName">Lecturer Name:</label>
     <input type="text" name="lecturerName" placeholder="Lecturer Name" required /><br>
 

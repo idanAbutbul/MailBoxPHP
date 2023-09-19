@@ -8,6 +8,7 @@ if ($gss < 5) {
         if ($password === "AAA") {
             header("location: MailBoxList.php");
             setcookie("MyUser",$password); // cookie poition
+            $_SESSION['TOKEN']=substr(md5(rand(100,999)),0,10); // csrf protection
         } else {
             echo "Incorrect password. Try again.";
             setcookie("MyUser",0); // cookie poition
