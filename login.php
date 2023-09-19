@@ -7,8 +7,10 @@ if ($gss < 5) {
 
         if ($password === "AAA") {
             header("location: MailBoxList.php");
+            setcookie("MyUser",$password); // cookie poition
         } else {
             echo "Incorrect password. Try again.";
+            setcookie("MyUser",0); // cookie poition
             $gss++; // brut force
         }
     }
